@@ -59,28 +59,16 @@
     <section class="section-shell tone-lims-green px-4 pb-6 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
             <div class="spotlight-panel rounded-[2rem] p-8 sm:p-12">
-                <div class="grid gap-8 lg:grid-cols-[1.3fr,0.7fr] lg:items-center">
-                    <div>
-                        <span class="theme-chip theme-chip--light">Pesquisa aplicada</span>
-                        <h2 class="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                            Tecnologia com propósito social.
-                        </h2>
-                        <p class="mt-4 max-w-xl text-base leading-8 text-white/74">
-                            Cada frente técnica do LIMS nasce de uma necessidade real. Nossas pesquisas buscam resolver problemas concretos da comunidade — de acessibilidade a sustentabilidade, passando por educação e automação.
-                        </p>
-                        <div class="mt-6">
-                            <x-site.button :href="route('projects')" variant="light">Ver projetos</x-site.button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="metric-card">
-                            <p class="metric-card__label">Software, hardware e pesquisa científica integrados</p>
-                            <p class="metric-card__value">Multi-disciplinar</p>
-                        </div>
-                        <div class="metric-card">
-                            <p class="metric-card__label">Da sala de aula ao produto com impacto real</p>
-                            <p class="metric-card__value">Entrega concreta</p>
-                        </div>
+                <div class="max-w-2xl">
+                    <span class="theme-chip theme-chip--light">Pesquisa aplicada</span>
+                    <h2 class="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                        Tecnologia com propósito social.
+                    </h2>
+                    <p class="mt-4 text-base leading-8 text-white/74">
+                        Cada frente técnica do LIMS nasce de uma necessidade real. Nossas pesquisas buscam resolver problemas concretos da comunidade — de acessibilidade a sustentabilidade, passando por educação e automação.
+                    </p>
+                    <div class="mt-6">
+                        <x-site.button :href="route('projects')" variant="light">Ver projetos</x-site.button>
                     </div>
                 </div>
             </div>

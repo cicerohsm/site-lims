@@ -62,28 +62,16 @@
     <section class="section-shell tone-lims-green px-4 pb-6 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
             <div class="spotlight-panel rounded-[2rem] p-8 sm:p-12">
-                <div class="grid gap-8 lg:grid-cols-[1.3fr,0.7fr] lg:items-center">
-                    <div>
-                        <span class="theme-chip theme-chip--light">Participe</span>
-                        <h2 class="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                            Quer desenvolver um projeto no LIMS?
-                        </h2>
-                        <p class="mt-4 max-w-xl text-base leading-8 text-white/74">
-                            O laboratório está sempre aberto a novos pesquisadores, bolsistas e parceiros. Se você tem uma ideia, uma demanda ou quer participar de uma das frentes ativas, entre em contato com a equipe.
-                        </p>
-                        <div class="mt-6">
-                            <x-site.button :href="route('contact.show')" variant="light">Fale conosco</x-site.button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="metric-card">
-                            <p class="metric-card__label">Estudantes de cursos técnicos e superiores</p>
-                            <p class="metric-card__value">Todos os perfis</p>
-                        </div>
-                        <div class="metric-card">
-                            <p class="metric-card__label">Do protótipo ao artigo científico publicado</p>
-                            <p class="metric-card__value">Entrega real</p>
-                        </div>
+                <div class="max-w-2xl">
+                    <span class="theme-chip theme-chip--light">Participe</span>
+                    <h2 class="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                        Quer desenvolver um projeto no LIMS?
+                    </h2>
+                    <p class="mt-4 text-base leading-8 text-white/74">
+                        O laboratório está sempre aberto a novos pesquisadores, bolsistas e parceiros. Se você tem uma ideia, uma demanda ou quer participar de uma das frentes ativas, entre em contato com a equipe.
+                    </p>
+                    <div class="mt-6">
+                        <x-site.button :href="route('contact.show')" variant="light">Fale conosco</x-site.button>
                     </div>
                 </div>
             </div>
