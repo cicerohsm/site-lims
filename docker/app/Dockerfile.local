@@ -1,0 +1,38 @@
+FROM php:8.3-fpm-alpine
+
+RUN apk add --no-cache \
+    bash \
+    curl \
+    git \
+    icu-dev \
+    libzip-dev \
+    oniguruma-dev \
+    sqlite-dev \
+    libpng-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    $PHPIZE_DEPS \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install \
+        exif \
+        gd \
+        intl \
+        mbstring \
+        pcntl \
+        pdo \
+        pdo_sqlite \
+        zip \
+    && apk del $PHPIZE_DEPS
+
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+COPY docker/app/entrypoint.sh /usr/local/bin/app-entrypoint
+
+RUN chmod +x /usr/local/bin/app-entrypoint
+
+ENTRYPOINT ["/usr/local/bin/app-entrypoint"]
+
+CMD ["php-fpm"]

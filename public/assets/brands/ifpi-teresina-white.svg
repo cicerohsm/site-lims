@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150" role="img" aria-labelledby="title desc">
+  <title id="title">IFPI - Campus Teresina Central</title>
+  <desc id="desc">Instituto Federal de Educação, Ciência e Tecnologia do Piauí - Campus Teresina Central</desc>
+  <g fill="#fff">
+    <circle cx="24" cy="24" r="14"/>
+    <rect x="46" y="10" width="28" height="28" rx="4"/>
+    <rect x="82" y="10" width="28" height="28" rx="4"/>
+    <rect x="10" y="46" width="28" height="28" rx="4"/>
+    <rect x="46" y="46" width="28" height="28" rx="4"/>
+    <rect x="10" y="82" width="28" height="28" rx="4"/>
+    <rect x="46" y="82" width="28" height="28" rx="4"/>
+    <rect x="82" y="82" width="28" height="28" rx="4"/>
+    <rect x="10" y="118" width="28" height="28" rx="4"/>
+    <rect x="46" y="118" width="28" height="28" rx="4"/>
+  </g>
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif">
+    <text x="135" y="34" font-size="25" font-weight="800">INSTITUTO FEDERAL DE</text>
+    <text x="135" y="64" font-size="25" font-weight="800">EDUCAÇÃO, CIÊNCIA E TECNOLOGIA</text>
+    <text x="135" y="94" font-size="25" font-weight="800">PIAUÍ</text>
+    <text x="135" y="126" font-size="22" font-weight="700">Campus Teresina Central</text>
+  </g>
+</svg>
