@@ -2,21 +2,26 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class PageResponseTest extends TestCase
 {
+    use RefreshDatabase;
+
     public static function pageProvider(): array
     {
         return [
             'home' => ['/', 'Laboratório de Inovação em Sistemas Multimídia'],
-            'sobre' => ['/sobre', 'principais núcleos de pesquisa e extensão em tecnologia do IFPI'],
-            'projetos' => ['/projetos', 'Trabalhos do LIMS'],
+            'sobre' => ['/sobre', 'principais núcleos de pesquisa'],
+            'projetos' => ['/projetos', 'Trabalhos em destaque'],
             'eventos' => ['/eventos', 'Eventos e participações do LIMS'],
-            'time' => ['/time', 'Equipe do LIMS'],
-            'tecnologias' => ['/tecnologias', 'Base técnica dos projetos'],
-            'blog' => ['/blog', 'Artigos informativos do LIMS'],
+            'equipe' => ['/equipe', 'Equipe do LIMS'],
+            'tecnologias' => ['/tecnologias', 'base técnica'],
+            'blog' => ['/blog', 'Blog'],
+            'publicacoes' => ['/publicacoes', 'Publicações'],
+            'recursos' => ['/recursos', 'Recursos'],
             'contato' => ['/contato', 'Contatos com o LIMS'],
         ];
     }

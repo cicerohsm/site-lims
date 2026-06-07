@@ -110,7 +110,7 @@
                     Espaço dedicado à publicação de conteúdos do laboratório para contribuir com a difusão de conhecimento e com a sociedade.
                 </p>
                 <div class="mt-6">
-                    <x-site.button :href="route('blog')" variant="secondary">Ver planejamento</x-site.button>
+                    <x-site.button :href="route('blog.index')" variant="secondary">Ver Blog</x-site.button>
                 </div>
             </article>
 

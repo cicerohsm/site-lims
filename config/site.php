@@ -89,9 +89,19 @@ return [
             'patterns' => ['technologies'],
         ],
         [
+            'label' => 'Publicações',
+            'route' => 'publications.index',
+            'patterns' => ['publications*'],
+        ],
+        [
+            'label' => 'Recursos',
+            'route' => 'resources.index',
+            'patterns' => ['resources*'],
+        ],
+        [
             'label' => 'Blog',
-            'route' => 'blog',
-            'patterns' => ['blog'],
+            'route' => 'blog.index',
+            'patterns' => ['blog*'],
         ],
     ],
 
@@ -120,9 +130,17 @@ return [
             'title' => 'Tecnologias | LIMS',
             'description' => 'Tecnologias, métodos e áreas técnicas trabalhadas no LIMS.',
         ],
+        'publications' => [
+            'title' => 'Publicações | LIMS',
+            'description' => 'Artigos científicos, TCCs e trabalhos acadêmicos produzidos pelos membros do LIMS.',
+        ],
+        'resources' => [
+            'title' => 'Recursos | LIMS',
+            'description' => 'Ferramentas, datasets, templates e materiais educacionais disponibilizados pelo laboratório.',
+        ],
         'blog' => [
             'title' => 'Blog | LIMS',
-            'description' => 'Espaço futuro para artigos informativos e difusão de conhecimento do LIMS.',
+            'description' => 'Artigos, notícias e conteúdos sobre pesquisa e inovação do laboratório LIMS.',
         ],
         'contact' => [
             'title' => 'Fale Conosco | LIMS',

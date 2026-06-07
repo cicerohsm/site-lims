@@ -19,7 +19,7 @@ class LimsSiteContentTest extends TestCase
             ->assertSee(route('events'), false)
             ->assertSee(route('team'), false)
             ->assertSee(route('technologies'), false)
-            ->assertSee(route('blog'), false)
+            ->assertSee(route('blog.index'), false)
             ->assertSee(route('contact.show'), false);
     }
 
