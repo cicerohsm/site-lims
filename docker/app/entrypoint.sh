@@ -11,4 +11,8 @@ mkdir -p \
 
 chmod -R 0777 /var/www/html/storage /var/www/html/bootstrap/cache || true
 
+php artisan migrate --force --no-interaction 2>/dev/null || true
+php artisan db:seed --force --no-interaction 2>/dev/null || true
+php artisan storage:link --force 2>/dev/null || true
+
 exec "$@"

@@ -1,10 +1,32 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lims-postgres
+    environment:
+      POSTGRES_DB: lims_db
+      POSTGRES_USER: lims
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - lims
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lims -d lims_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   app:
     build:
       context: .
       dockerfile: docker/app/Dockerfile.local
     container_name: lims-app
     working_dir: /var/www/html
+    depends_on:
+      postgres:
+        condition: service_healthy
     volumes:
       - ./:/var/www/html
     networks:
@@ -42,3 +64,4 @@ networks:
 
 volumes:
   node_modules:
+  postgres_data:
