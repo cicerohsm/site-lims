@@ -72,17 +72,22 @@ class LimsSiteContentTest extends TestCase
             ->assertSee('Internet das Coisas');
     }
 
-    public function test_projects_page_renders_configured_project_cards(): void
+    public function test_projects_page_renders_featured_publications(): void
     {
-        $response = $this->get('/projetos');
+        Publication::factory()->create([
+            'title' => 'Sistema de Apoio a Eventos Acadêmicos',
+            'authors' => 'Equipe LIMS',
+            'year' => 2026,
+            'venue' => 'Teresina INFO',
+            'type' => 'article',
+        ]);
 
-        foreach (config('site.lims.projects') as $project) {
-            $response
-                ->assertSee($project['name'])
-                ->assertSee($project['responsible'])
-                ->assertSee($project['event'])
-                ->assertSee($project['article']);
-        }
+        $this->get('/projetos')
+            ->assertOk()
+            ->assertSee('Trabalhos em destaque')
+            ->assertSee('Sistema de Apoio a Eventos Acadêmicos')
+            ->assertSee('Equipe LIMS')
+            ->assertSee(route('publications.index'), false);
     }
 
     public function test_events_page_renders_published_event_cards(): void

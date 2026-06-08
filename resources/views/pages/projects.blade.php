@@ -1,7 +1,3 @@
-@php
-    $projects = config('site.lims.projects');
-@endphp
-
 <x-layouts.app :meta="$meta" :page-key="$pageKey" :theme-key="$themeKey">
 
     {{-- HERO --}}
@@ -23,8 +19,8 @@
             <div class="grid gap-4 sm:grid-cols-3">
                 <article class="info-card" data-reveal>
                     <p class="text-xs font-bold uppercase tracking-widest text-[color:var(--theme-accent)]">Projetos</p>
-                    <p class="mt-2 font-display text-5xl font-semibold tracking-tight text-slate-950">{{ count($projects) }}+</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500">trabalhos ativos ou concluídos pelo laboratório</p>
+                    <p class="mt-2 font-display text-5xl font-semibold tracking-tight text-slate-950">{{ $featuredPublications->count() }}</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-500">trabalhos destacados por publicações cadastradas</p>
                 </article>
                 <article class="info-card">
                     <p class="text-xs font-bold uppercase tracking-widest text-[color:var(--theme-accent)]">Áreas cobertas</p>
@@ -43,18 +39,29 @@
     {{-- GRID DE PROJETOS --}}
     <section class="section-shell tone-lims-red px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
-            <x-site.section-heading
-                eyebrow="Portfólio"
-                title="Trabalhos em destaque"
-                description="Cada projeto reúne equipe, objetivo, evento de apresentação e entrega acadêmica ou produto funcional."
-            />
-            <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                @foreach ($projects as $project)
-                    <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }}">
-                        <x-lims.project-card :project="$project" />
-                    </div>
-                @endforeach
+            <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+                <x-site.section-heading
+                    eyebrow="Publicações"
+                    title="Trabalhos em destaque"
+                    description="Produções acadêmicas cadastradas pela equipe do LIMS."
+                />
+                <x-site.button :href="route('publications.index')" variant="secondary" size="sm">Ver publicações</x-site.button>
             </div>
+
+            @if ($featuredPublications->isNotEmpty())
+                <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                    @foreach ($featuredPublications as $publication)
+                        <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green', 'tone-lims-blue'][$loop->index % 4] }}">
+                            <x-lims.publication-feature-card :publication="$publication" />
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="mt-8 rounded-3xl border border-dashed border-slate-200 bg-white/80 p-8 text-center text-slate-500">
+                    <h3 class="font-display text-2xl font-semibold tracking-tight text-slate-950">Trabalhos em atualização</h3>
+                    <p class="mt-3 text-sm leading-6">As publicações em destaque serão exibidas aqui assim que forem cadastradas pela equipe.</p>
+                </div>
+            @endif
         </div>
     </section>
 

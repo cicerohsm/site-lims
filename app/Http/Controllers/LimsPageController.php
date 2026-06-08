@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publication;
 use App\Models\TeamMember;
 use App\Models\Technology;
 use App\Repositories\Contracts\EventRepositoryInterface;
@@ -18,7 +19,12 @@ class LimsPageController extends Controller
 
     public function projects(): View
     {
-        return $this->renderPage('pages.projects', 'projects', 'lims-red');
+        $featuredPublications = Publication::orderByDesc('year')
+            ->orderBy('title')
+            ->limit(4)
+            ->get();
+
+        return $this->renderPage('pages.projects', 'projects', 'lims-red', compact('featuredPublications'));
     }
 
     public function events(): View
