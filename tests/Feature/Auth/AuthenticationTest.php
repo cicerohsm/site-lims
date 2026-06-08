@@ -14,7 +14,12 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/login');
 
-        $response->assertStatus(200);
+        $response
+            ->assertStatus(200)
+            ->assertSee('Entrar no LIMS')
+            ->assertSee('Senha')
+            ->assertSee('Lembrar de mim')
+            ->assertSee('assets/brands/lims-logo.svg', false);
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
