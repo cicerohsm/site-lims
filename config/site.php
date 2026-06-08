@@ -11,15 +11,11 @@ return [
         'social' => [
             [
                 'label' => 'Instagram',
-                'url' => '#',
+                'url' => 'https://www.instagram.com/ifpilims/',
             ],
             [
                 'label' => 'LinkedIn',
-                'url' => '#',
-            ],
-            [
-                'label' => 'GitHub',
-                'url' => '#',
+                'url' => 'https://www.linkedin.com/company/ifpi-lims/',
             ],
         ],
     ],
@@ -94,11 +90,6 @@ return [
             'patterns' => ['publications*'],
         ],
         [
-            'label' => 'Recursos',
-            'route' => 'resources.index',
-            'patterns' => ['resources*'],
-        ],
-        [
             'label' => 'Blog',
             'route' => 'blog.index',
             'patterns' => ['blog*'],
@@ -137,6 +128,10 @@ return [
         'resources' => [
             'title' => 'Recursos | LIMS',
             'description' => 'Ferramentas, datasets, templates e materiais educacionais disponibilizados pelo laboratório.',
+        ],
+        'certificates' => [
+            'title' => 'Validar Certificado | LIMS',
+            'description' => 'Valide certificados emitidos pelo LIMS usando o código de verificação.',
         ],
         'blog' => [
             'title' => 'Blog | LIMS',
@@ -286,8 +281,12 @@ return [
             ],
         ],
         'contacts' => [
-            ['label' => 'E-mail', 'value' => 'contato@lims.edu.br', 'href' => 'mailto:contato@lims.edu.br'],
-            ['label' => 'Localização', 'value' => 'Teresina - PI', 'href' => '#'],
+            ['label' => 'E-mail', 'value' => 'lims@ifpi.edu.br', 'href' => 'mailto:lims@ifpi.edu.br'],
+            [
+                'label' => 'Localização',
+                'value' => 'R. Quintino Bocaiúva, 141 - Centro (Sul), Teresina - PI, 64001-270',
+                'href' => 'https://www.google.com/maps/search/?api=1&query=R.%20Quintino%20Bocai%C3%BAva%2C%20141%20-%20Centro%20%28Sul%29%2C%20Teresina%20-%20PI%2C%2064001-270',
+            ],
             ['label' => 'Parcerias', 'value' => 'Projetos, pesquisa e extensão', 'href' => '/contato'],
         ],
     ],

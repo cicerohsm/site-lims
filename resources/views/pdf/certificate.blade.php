@@ -23,6 +23,32 @@
         flex-direction: column;
     }
 
+    .corner-logo {
+        position: absolute;
+        top: 22px;
+        z-index: 2;
+    }
+
+    .corner-logo--lims {
+        left: 42px;
+    }
+
+    .corner-logo--lims img {
+        width: 104px;
+        height: auto;
+    }
+
+    .corner-logo--ifpi {
+        right: 42px;
+        width: 220px;
+    }
+
+    .corner-logo--ifpi img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
     .border-top {
         height: 8px;
         background: linear-gradient(90deg, #1d4ed8, #ef4444);
@@ -40,6 +66,7 @@
 
     .logo-area {
         margin-bottom: 16px;
+        padding-top: 6px;
     }
 
     .logo-text {
@@ -151,13 +178,25 @@
 </style>
 </head>
 <body>
+@php
+    $limsLogo = public_path('assets/brands/lims-logo-transparent.png');
+    $ifpiLogo = public_path('assets/brands/ifpi-teresina.svg');
+@endphp
 <div class="page">
     <div class="border-top"></div>
+
+    <div class="corner-logo corner-logo--lims">
+        <img src="{{ $limsLogo }}" alt="LIMS">
+    </div>
+
+    <div class="corner-logo corner-logo--ifpi">
+        <img src="{{ $ifpiLogo }}" alt="IFPI - Campus Teresina Central">
+    </div>
 
     <div class="content">
         <div class="logo-area">
             <div class="logo-text">LIMS</div>
-            <div class="institution">Laboratório de Inovação e Modelagem de Software · IFPI</div>
+            <div class="institution">Laboratório de Inovação em Sistemas Multimídia · IFPI</div>
         </div>
 
         <div class="divider"></div>
@@ -171,7 +210,7 @@
         <div class="event-info">
             participou do evento
             <div class="event-name">{{ $event->title }}</div>
-            realizado em {{ $event->starts_at->format('d \d\e F \d\e Y') }}
+            realizado em {{ $event->starts_at->translatedFormat('d \d\e F \d\e Y') }}
             @if ($event->location)
                 , em {{ $event->location }}
             @endif
@@ -195,8 +234,8 @@
         </div>
 
         <div class="token-info">
-            Código de verificação: {{ $registration->token }}<br>
-            Emitido em: {{ now()->format('d/m/Y') }}
+            Código de validação: {{ $registration->token }}<br>
+            Emitido em: {{ now()->translatedFormat('d \d\e F \d\e Y') }}
         </div>
 
         <div class="signature-block">
