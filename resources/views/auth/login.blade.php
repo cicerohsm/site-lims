@@ -4,9 +4,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="mb-6">
+    <div class="mb-6 text-center">
         <h1 class="font-display text-2xl font-semibold tracking-tight text-slate-950">Entrar no LIMS</h1>
-        <p class="mt-2 text-sm leading-6 text-slate-500">Acesse o painel administrativo e os recursos protegidos do laboratório.</p>
+        <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">Acesse o painel administrativo e os recursos protegidos do laboratório.</p>
     </div>
 
     <form method="POST" action="{{ route('login') }}">
@@ -39,14 +39,14 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-5 flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-slate-600 hover:text-slate-950 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[color:var(--theme-accent)]" href="{{ route('password.request') }}">
                     Esqueceu sua senha?
                 </a>
             @endif
 
-            <button type="submit" class="ms-3 inline-flex items-center rounded-lg bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[color:var(--theme-accent-strong)] focus:outline-none focus:ring-2 focus:ring-[color:var(--theme-accent)] focus:ring-offset-2">
+            <button type="submit" class="inline-flex items-center rounded-lg bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[color:var(--theme-accent-strong)] focus:outline-none focus:ring-2 focus:ring-[color:var(--theme-accent)] focus:ring-offset-2">
                 Entrar
             </button>
         </div>

@@ -1,9 +1,9 @@
 <x-guest-layout>
     @section('title', 'Redefinir senha - LIMS')
 
-    <div class="mb-6">
+    <div class="mb-6 text-center">
         <h1 class="font-display text-2xl font-semibold tracking-tight text-slate-950">Redefinir senha</h1>
-        <p class="mt-2 text-sm leading-6 text-slate-500">Crie uma nova senha para acessar o LIMS.</p>
+        <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">Crie uma nova senha para acessar o LIMS.</p>
     </div>
 
     <form method="POST" action="{{ route('password.store') }}">
@@ -37,7 +37,7 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-5 flex justify-center">
             <button type="submit" class="inline-flex items-center rounded-lg bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[color:var(--theme-accent-strong)] focus:outline-none focus:ring-2 focus:ring-[color:var(--theme-accent)] focus:ring-offset-2">
                 Redefinir senha
             </button>
