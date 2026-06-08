@@ -60,16 +60,25 @@
     <section class="section-shell tone-lims-red px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
             <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <x-site.section-heading eyebrow="Projetos" title="Trabalhos em destaque" description="Cards com projeto, responsável, descrição, ano, evento e artigo." />
-                <x-site.button :href="route('projects')" variant="secondary" size="sm">Página de projetos</x-site.button>
+                <x-site.section-heading eyebrow="Publicações" title="Trabalhos em destaque" description="Produções acadêmicas cadastradas pela equipe do LIMS." />
+                <x-site.button :href="route('publications.index')" variant="secondary" size="sm">Ver publicações</x-site.button>
             </div>
-            <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-                @foreach ($lims['projects'] as $project)
-                    <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green', 'tone-lims-blue'][$loop->index % 4] }}">
-                        <x-lims.project-card :project="$project" />
+            @if ($featuredPublications->isNotEmpty())
+                <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                    @foreach ($featuredPublications as $publication)
+                        <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green', 'tone-lims-blue'][$loop->index % 4] }}">
+                            <x-lims.publication-feature-card :publication="$publication" />
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="mt-8 tone-lims-blue">
+                    <div class="info-card">
+                        <h3 class="font-display text-lg font-semibold tracking-tight text-slate-950">Trabalhos em atualização</h3>
+                        <p class="mt-2 text-sm leading-7 text-slate-600">As publicações em destaque aparecerão aqui assim que forem cadastradas.</p>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -78,11 +87,18 @@
             <div class="grid gap-8 lg:grid-cols-[0.8fr,1.2fr] lg:items-start">
                 <x-site.section-heading eyebrow="Time" title="Equipe do LIMS" description="Participantes em formato interativo. Clique em cada card para abrir a descrição." />
                 <div class="grid gap-4 sm:grid-cols-3">
-                    @foreach ($lims['team'] as $member)
+                    @forelse ($team as $member)
                         <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }}">
                             <x-lims.member-card :member="$member" />
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="tone-lims-blue sm:col-span-3">
+                            <div class="info-card">
+                                <h3 class="font-display text-lg font-semibold tracking-tight text-slate-950">Time em atualização</h3>
+                                <p class="mt-2 text-sm leading-7 text-slate-600">Os perfis dos participantes aparecerão aqui assim que forem cadastrados.</p>
+                            </div>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -93,9 +109,13 @@
             <div class="surface-panel p-6 sm:p-8">
                 <x-site.section-heading eyebrow="Tecnologias" title="Frentes técnicas do laboratório" description="Áreas com forte apelo social, automação, acessibilidade, educação e inovação aplicada." />
                 <div class="mt-7 flex flex-wrap gap-3">
-                    @foreach ($lims['technologies'] as $technology)
-                        <span class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }} rounded-full border border-[color:var(--theme-border)] bg-[color:var(--theme-soft)] px-4 py-2 text-sm font-semibold text-[color:var(--theme-accent-strong)]">{{ $technology }}</span>
-                    @endforeach
+                    @forelse ($technologies as $technology)
+                        <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }}">
+                            <x-lims.technology-card :technology="$technology" compact />
+                        </div>
+                    @empty
+                        <p class="text-sm text-slate-500">As frentes tecnológicas aparecerão aqui assim que forem cadastradas.</p>
+                    @endforelse
                 </div>
             </div>
         </div>

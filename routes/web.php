@@ -30,10 +30,12 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 // ─── Publicações ───────────────────────────────────────────────────────────
 Route::get('/publicacoes', [PublicationController::class, 'index'])->name('publications.index');
 
-// ─── Recursos ──────────────────────────────────────────────────────────────
-Route::get('/recursos', [ResourceController::class, 'index'])->name('resources.index');
+// ─── Recursos (requer autenticação) ────────────────────────────────────────
+Route::get('/recursos', [ResourceController::class, 'index'])->name('resources.index')->middleware('auth');
 
 // ─── Eventos (detalhe + inscrição pública) ─────────────────────────────────
+Route::get('/eventos/certificados/validar', [CertificateController::class, 'validateForm'])->name('certificate.validate');
+Route::post('/eventos/certificados/validar', [CertificateController::class, 'validateCode'])->name('certificate.validate.check');
 Route::get('/eventos/{slug}', [EventController::class, 'show'])->name('events.show');
 Route::get('/eventos/{slug}/inscricao', [RegistrationController::class, 'create'])->name('events.register.create');
 Route::post('/eventos/{slug}/inscricao', [RegistrationController::class, 'store'])->name('events.register.store');
@@ -50,6 +52,8 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::resource('publications', Admin\PublicationController::class);
     Route::resource('resources', Admin\ResourceController::class);
     Route::resource('events', Admin\EventController::class);
+    Route::resource('team-members', Admin\TeamMemberController::class)->except('show');
+    Route::resource('technologies', Admin\TechnologyController::class)->except('show');
 
     Route::get('events/{event}/registrations', [Admin\RegistrationController::class, 'index'])
         ->name('events.registrations');

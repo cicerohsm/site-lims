@@ -1,7 +1,3 @@
-@php
-    $team = config('site.lims.team');
-@endphp
-
 <x-layouts.app :meta="$meta" :page-key="$pageKey" :theme-key="$themeKey">
 
     {{-- HERO --}}
@@ -25,13 +21,22 @@
                 title="Quem compõe o LIMS"
                 description="Clique em cada participante para abrir uma breve descrição do seu papel no laboratório."
             />
-            <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach ($team as $member)
-                    <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }}">
-                        <x-lims.member-card :member="$member" />
+            @if ($team->isNotEmpty())
+                <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($team as $member)
+                        <div class="{{ ['tone-lims-blue', 'tone-lims-red', 'tone-lims-green'][$loop->index % 3] }}">
+                            <x-lims.member-card :member="$member" />
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="mt-10 tone-lims-blue">
+                    <div class="info-card">
+                        <h2 class="font-display text-xl font-semibold tracking-tight text-slate-950">Time em atualização</h2>
+                        <p class="mt-3 text-sm leading-7 text-slate-600">Os perfis dos participantes aparecerão aqui assim que forem cadastrados pela equipe do LIMS.</p>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endif
         </div>
     </section>
 

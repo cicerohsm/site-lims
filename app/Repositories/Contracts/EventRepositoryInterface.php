@@ -16,6 +16,8 @@ interface EventRepositoryInterface
 
     public function upcoming(int $limit = 4): Collection;
 
+    public function latestPublished(): ?Event;
+
     public function create(array $data): Event;
 
     public function update(Event $event, array $data): Event;

@@ -2,10 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\Event;
+use App\Models\Publication;
+use App\Models\Technology;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LimsSiteContentTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_home_header_renders_lims_navigation_and_enter_button(): void
     {
         $response = $this->get('/');
@@ -35,6 +41,37 @@ class LimsSiteContentTest extends TestCase
         }
     }
 
+    public function test_home_renders_featured_publications(): void
+    {
+        Publication::factory()->create([
+            'title' => 'Sistema Multimídia para Educação',
+            'authors' => 'Equipe LIMS',
+            'year' => 2026,
+            'venue' => 'Mostra Científica',
+            'type' => 'article',
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Trabalhos em destaque')
+            ->assertSee('Sistema Multimídia para Educação')
+            ->assertSee('Equipe LIMS')
+            ->assertSee(route('publications.index'), false);
+    }
+
+    public function test_home_renders_configured_technologies_from_admin_data(): void
+    {
+        Technology::factory()->create([
+            'title' => 'Internet das Coisas',
+            'is_active' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Frentes técnicas do laboratório')
+            ->assertSee('Internet das Coisas');
+    }
+
     public function test_projects_page_renders_configured_project_cards(): void
     {
         $response = $this->get('/projetos');
@@ -48,16 +85,34 @@ class LimsSiteContentTest extends TestCase
         }
     }
 
-    public function test_events_page_renders_configured_event_cards(): void
+    public function test_events_page_renders_published_event_cards(): void
     {
+        Event::factory()->create([
+            'title' => 'Evento Publicado Antigo',
+            'status' => 'published',
+            'created_at' => now()->subDay(),
+            'updated_at' => now()->subDay(),
+        ]);
+        $event = Event::factory()->create([
+            'title' => 'Oficina de Desenvolvimento Web',
+            'slug' => 'oficina-desenvolvimento-web',
+            'type' => 'workshop',
+            'status' => 'published',
+            'registration_open' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $response = $this->get('/eventos');
 
-        foreach (config('site.lims.events') as $event) {
-            $response
-                ->assertSee($event['name'])
-                ->assertSee($event['type'])
-                ->assertSee(asset($event['image']), false);
-        }
+        $response
+            ->assertOk()
+            ->assertSee($event->title)
+            ->assertSee($event->type)
+            ->assertSee(route('events.show', $event->slug), false)
+            ->assertSee('Ver inscrição')
+            ->assertSee('Último evento publicado')
+            ->assertSee('Oficina de Desenvolvimento Web');
     }
 
     public function test_footer_renders_lims_ifpi_and_social_links(): void
@@ -70,7 +125,9 @@ class LimsSiteContentTest extends TestCase
             ->assertSee('Redes sociais do LIMS')
             ->assertSee('Instagram')
             ->assertSee('LinkedIn')
-            ->assertSee('GitHub')
+            ->assertSee('https://www.instagram.com/ifpilims/', false)
+            ->assertSee('https://www.linkedin.com/company/ifpi-lims/', false)
+            ->assertDontSee('GitHub')
             ->assertSee('Contatos com o LIMS');
     }
 }

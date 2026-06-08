@@ -35,6 +35,13 @@ class EloquentEventRepository implements EventRepositoryInterface
             ->get();
     }
 
+    public function latestPublished(): ?Event
+    {
+        return Event::published()
+            ->latest()
+            ->first();
+    }
+
     public function create(array $data): Event
     {
         return Event::create($data);

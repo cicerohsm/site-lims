@@ -21,7 +21,7 @@ class PageResponseTest extends TestCase
             'tecnologias' => ['/tecnologias', 'base técnica'],
             'blog' => ['/blog', 'Blog'],
             'publicacoes' => ['/publicacoes', 'Publicações'],
-            'recursos' => ['/recursos', 'Recursos'],
+            'certificados' => ['/eventos/certificados/validar', 'Validar certificado'],
             'contato' => ['/contato', 'Contatos com o LIMS'],
         ];
     }
@@ -34,6 +34,12 @@ class PageResponseTest extends TestCase
         $response
             ->assertOk()
             ->assertSee($content);
+    }
+
+    public function test_guest_is_redirected_from_resources_page(): void
+    {
+        $this->get('/recursos')
+            ->assertRedirect(route('login'));
     }
 
     public function test_fallback_renders_custom_404(): void

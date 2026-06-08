@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TeamMember;
+use App\Models\Technology;
+use App\Repositories\Contracts\EventRepositoryInterface;
 use Illuminate\Contracts\View\View;
 
 class LimsPageController extends Controller
 {
+    public function __construct(private readonly EventRepositoryInterface $events) {}
+
     public function about(): View
     {
         return $this->renderPage('pages.about', 'about', 'group');
@@ -18,17 +23,30 @@ class LimsPageController extends Controller
 
     public function events(): View
     {
-        return $this->renderPage('pages.events', 'events', 'lims-green');
+        $events = $this->events->paginate(12);
+        $highlightEvent = $this->events->latestPublished();
+
+        return $this->renderPage('pages.events', 'events', 'lims-green', compact('events', 'highlightEvent'));
     }
 
     public function team(): View
     {
-        return $this->renderPage('pages.team', 'team', 'group');
+        $team = TeamMember::active()
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
+        return $this->renderPage('pages.team', 'team', 'group', compact('team'));
     }
 
     public function technologies(): View
     {
-        return $this->renderPage('pages.technologies', 'technologies', 'lims-red');
+        $technologies = Technology::active()
+            ->orderBy('sort_order')
+            ->orderBy('title')
+            ->get();
+
+        return $this->renderPage('pages.technologies', 'technologies', 'lims-red', compact('technologies'));
     }
 
     public function blog(): View

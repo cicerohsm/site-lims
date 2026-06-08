@@ -19,7 +19,7 @@ class CertificateController extends Controller
         $confirmed = $event->registrations()->where('status', 'confirmed')->get();
 
         foreach ($confirmed as $registration) {
-            $this->action->handle($registration->load('certificate'));
+            $this->action->handle($registration->load('certificate'), force: true);
         }
 
         return back()->with('success', "Certificados gerados para {$confirmed->count()} participante(s).");

@@ -10,6 +10,8 @@
             ['label' => 'Posts', 'value' => $stats['posts'], 'route' => 'admin.posts.index', 'color' => 'blue'],
             ['label' => 'Publicações', 'value' => $stats['publications'], 'route' => 'admin.publications.index', 'color' => 'purple'],
             ['label' => 'Eventos', 'value' => $stats['events'], 'route' => 'admin.events.index', 'color' => 'green'],
+            ['label' => 'Time', 'value' => $stats['team_members'], 'route' => 'admin.team-members.index', 'color' => 'blue'],
+            ['label' => 'Tecnologias', 'value' => $stats['technologies'], 'route' => 'admin.technologies.index', 'color' => 'purple'],
             ['label' => 'Inscrições', 'value' => $stats['registrations'], 'route' => 'admin.events.index', 'color' => 'yellow'],
             ['label' => 'Pendentes', 'value' => $stats['pending_registrations'], 'route' => 'admin.events.index', 'color' => 'red'],
         ];
@@ -31,6 +33,8 @@
             <a href="{{ route('admin.posts.create') }}" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 transition-colors">+ Novo Post</a>
             <a href="{{ route('admin.publications.create') }}" class="rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-500 transition-colors">+ Nova Publicação</a>
             <a href="{{ route('admin.events.create') }}" class="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-500 transition-colors">+ Novo Evento</a>
+            <a href="{{ route('admin.team-members.create') }}" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 transition-colors">+ Novo Membro</a>
+            <a href="{{ route('admin.technologies.create') }}" class="rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-500 transition-colors">+ Nova Tecnologia</a>
             <a href="{{ route('admin.resources.create') }}" class="rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-600 transition-colors">+ Novo Recurso</a>
         </div>
     </div>
