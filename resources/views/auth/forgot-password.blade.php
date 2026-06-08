@@ -17,7 +17,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" value="E-mail" />
-            <x-text-input id="email" class="block mt-1 w-full border-slate-300 focus:border-[color:var(--theme-accent)] focus:ring-[color:var(--theme-accent)]" type="email" name="email" :value="old('email')" required autofocus />
+            <x-text-input id="email" class="block mt-2 w-full rounded-xl border-slate-300 px-4 py-3 text-base focus:border-[color:var(--theme-accent)] focus:ring-[color:var(--theme-accent)]" type="email" name="email" :value="old('email')" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
