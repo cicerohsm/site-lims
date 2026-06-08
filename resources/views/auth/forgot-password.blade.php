@@ -1,6 +1,11 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    @section('title', 'Recuperar senha - LIMS')
+
+    <div class="mb-6">
+        <h1 class="font-display text-2xl font-semibold tracking-tight text-slate-950">Recuperar senha</h1>
+        <p class="mt-2 text-sm leading-6 text-slate-500">
+            Informe seu e-mail para receber um link de redefinição de senha.
+        </p>
     </div>
 
     <!-- Session Status -->
@@ -11,15 +16,17 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <x-input-label for="email" value="E-mail" />
+            <x-text-input id="email" class="block mt-1 w-full border-slate-300 focus:border-[color:var(--theme-accent)] focus:ring-[color:var(--theme-accent)]" type="email" name="email" :value="old('email')" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <div class="mt-6 flex items-center justify-between gap-4">
+            <a href="{{ route('login') }}" class="text-sm text-slate-600 underline hover:text-slate-950">Voltar ao login</a>
+
+            <button type="submit" class="inline-flex items-center rounded-lg bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[color:var(--theme-accent-strong)] focus:outline-none focus:ring-2 focus:ring-[color:var(--theme-accent)] focus:ring-offset-2">
+                Enviar link
+            </button>
         </div>
     </form>
 </x-guest-layout>

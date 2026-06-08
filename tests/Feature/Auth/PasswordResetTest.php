@@ -16,7 +16,12 @@ class PasswordResetTest extends TestCase
     {
         $response = $this->get('/forgot-password');
 
-        $response->assertStatus(200);
+        $response
+            ->assertStatus(200)
+            ->assertSee('Recuperar senha')
+            ->assertSee('Enviar link')
+            ->assertSee('Laboratório de Inovação em Sistemas Multimídia')
+            ->assertSee('assets/brands/lims-logo.svg', false);
     }
 
     public function test_reset_password_link_can_be_requested(): void
@@ -30,6 +35,23 @@ class PasswordResetTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
+    public function test_reset_password_email_is_sent_in_portuguese(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+
+        $this->post('/forgot-password', ['email' => $user->email]);
+
+        Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
+            $mail = $notification->toMail($user);
+
+            $this->assertSame('Redefinição de senha - LIMS', $mail->subject);
+
+            return true;
+        });
+    }
+
     public function test_reset_password_screen_can_be_rendered(): void
     {
         Notification::fake();
@@ -41,7 +63,11 @@ class PasswordResetTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
             $response = $this->get('/reset-password/'.$notification->token);
 
-            $response->assertStatus(200);
+            $response
+                ->assertStatus(200)
+                ->assertSee('Redefinir senha')
+                ->assertSee('Nova senha')
+                ->assertSee('Confirmar senha');
 
             return true;
         });

@@ -13,6 +13,8 @@ use App\Repositories\Eloquent\EloquentEventRepository;
 use App\Repositories\Eloquent\EloquentPostRepository;
 use App\Repositories\Eloquent\EloquentPublicationRepository;
 use App\Repositories\Eloquent\EloquentResourceRepository;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -31,6 +33,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('admin', fn (User $user) => $user->isAdmin());
+
+        ResetPassword::toMailUsing(function (object $notifiable, string $token) {
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+
+            return (new MailMessage)
+                ->subject('Redefinição de senha - LIMS')
+                ->greeting('Olá!')
+                ->line('Recebemos uma solicitação de redefinição de senha para sua conta no LIMS.')
+                ->action('Redefinir senha', $url)
+                ->line('Este link expira em 60 minutos.')
+                ->line('Se você não solicitou a redefinição, nenhuma ação é necessária.');
+        });
 
         if ($this->app->runningInConsole()) {
             return;

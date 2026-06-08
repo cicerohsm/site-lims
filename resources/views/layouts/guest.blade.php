@@ -16,14 +16,14 @@
     </head>
     <body class="font-sans text-slate-900 antialiased">
         <div class="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4 py-10">
-            <div class="mb-8 text-center">
-                <a href="{{ route('home') }}" class="inline-flex items-center justify-center">
-                    <img src="{{ asset(config('site.lims.logo')) }}" alt="LIMS" class="h-24 w-auto">
-                </a>
-                <p class="mt-3 text-sm font-medium text-slate-500">Laboratório de Inovação em Sistemas Multimídia</p>
-            </div>
-
             <div class="w-full max-w-md rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-xl shadow-slate-900/8">
+                <div class="mb-8 text-center">
+                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center">
+                        <img src="{{ asset(config('site.lims.logo')) }}" alt="LIMS" class="h-24 w-auto">
+                    </a>
+                    <p class="mt-3 text-sm font-medium text-slate-500">Laboratório de Inovação em Sistemas Multimídia</p>
+                </div>
+
                 {{ $slot }}
             </div>
         </div>
